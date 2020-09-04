@@ -179,12 +179,7 @@ func getObjectACL(predefinedACL string) []storage.ACLRule {
 		}
 	}
 
-	return []storage.ACLRule{
-		{
-			Entity: "projectOwner",
-			Role:   "OWNER",
-		},
-	}
+	return []storage.ACLRule{}
 }
 
 var crc32cTable = crc32.MakeTable(crc32.Castagnoli)
@@ -254,7 +249,7 @@ func (s *Server) multipartUpload(bucketName string, w http.ResponseWriter, r *ht
 	if objName == "" {
 		objName = metadata.Name
 	}
-
+	fmt.Printf("Bucket Name : %v \n", bucketName)
 	if !s.checkUploadPreconditions(w, r, bucketName, objName) {
 		return
 	}
